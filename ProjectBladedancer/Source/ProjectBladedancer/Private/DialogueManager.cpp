@@ -2,23 +2,23 @@
 
 
 #include "DialogueManager.h"
-#include "Blueprint/UserWidget.h"
-#include "MainGameInstance.h"
-#include "DialogueWidget.h"
 #include "Engine/DataTable.h"
 
-void UDialogueManager::StartDialogue(FName RowName)
+void UDialogueManager::StartDialogue(FName StartingRowName)
 {
-	UMainGameInstance* Instance = Cast<UMainGameInstance>(GetGameInstance());
-	UDialogueWidget* DialogueWidget = nullptr;
-	FDialogueRow* Row = nullptr;
+	CurrentRow = StartingRowName;
 	
-	if (Instance){ 
-		DialogueWidget = CreateWidget<UDialogueWidget>(GetWorld()->GetFirstPlayerController(), Instance->DialogueWidgetClass); 
-		Row = Instance->DialogueData->FindRow<FDialogueRow>(RowName, TEXT("StartDialogue"));
-	}
+	Instance = Cast<UMainGameInstance>(GetGameInstance());
 	
-	if (DialogueWidget && Row)
+	if (Instance){ DialogueWidget = CreateWidget<UDialogueWidget>(GetWorld()->GetFirstPlayerController(), Instance->DialogueWidgetClass); }
+	if (DialogueWidget) { DisplayDialogue(StartingRowName); }
+}
+
+void UDialogueManager::DisplayDialogue(FName RowName)
+{
+	FDialogueRow* Row = Instance->DialogueData->FindRow<FDialogueRow>(RowName, TEXT("DisplayDialogue"));
+	
+	if (Row)
 	{
 		DialogueWidget->SetSpeakerName(Row->Speaker);
 		DialogueWidget->SetDialogueText(Row->Text);
@@ -26,4 +26,21 @@ void UDialogueManager::StartDialogue(FName RowName)
 
 		DialogueWidget->AddToViewport();
 	}
+}
+
+void UDialogueManager::ProgressDialogue()
+{
+	FDialogueRow* Row = Instance->DialogueData->FindRow<FDialogueRow>(CurrentRow, TEXT("DisplayDialogue"));
+
+	if (Row)
+	{
+		if (Row->NextRow.IsNone())
+		{
+			// Set end flag
+			return;
+		}
+	}
+
+	CurrentRow = Row->NextRow;
+	DisplayDialogue(CurrentRow);
 }

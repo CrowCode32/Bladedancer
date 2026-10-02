@@ -20,4 +20,3 @@ void UDialogueWidget::SetDialogueIcon(UTexture2D* NewDialogueIcon)
 	DialogueIcon->SetBrushFromTexture(NewDialogueIcon, true);
 }
 
-

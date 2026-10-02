@@ -4,6 +4,8 @@
 
 #include "CoreMinimal.h"
 #include "Subsystems/GameInstanceSubsystem.h"
+#include "MainGameInstance.h"
+#include "DialogueWidget.h"
 #include "DialogueManager.generated.h"
 
 /**
@@ -26,6 +28,9 @@ struct FDialogueRow : public FTableRowBase
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	FText Text;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	FName NextRow;
 };
 
 
@@ -35,8 +40,21 @@ class PROJECTBLADEDANCER_API UDialogueManager : public UGameInstanceSubsystem
 	GENERATED_BODY()
 
 protected:
+	UFUNCTION(BlueprintCallable)
+	void StartDialogue(FName StartingRowName);
 
 	UFUNCTION(BlueprintCallable)
-	void StartDialogue(FName RowName);
+	void ProgressDialogue();
+
+private:
+	void DisplayDialogue(FName RowName);
+
+	UPROPERTY()
+	UDialogueWidget* DialogueWidget;
+
+	UPROPERTY()
+	UMainGameInstance* Instance;
+
+	FName CurrentRow;
 	
 };
