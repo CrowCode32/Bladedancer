@@ -33,11 +33,17 @@ struct FDialogueRow : public FTableRowBase
 	FName NextRow;
 };
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FDialogueComplete);
 
 UCLASS()
 class PROJECTBLADEDANCER_API UDialogueManager : public UGameInstanceSubsystem
 {
 	GENERATED_BODY()
+
+public:
+
+	UPROPERTY(BlueprintAssignable)
+	FDialogueComplete DialogueComplete;
 
 protected:
 	UFUNCTION(BlueprintCallable)

@@ -36,7 +36,9 @@ void UDialogueManager::ProgressDialogue()
 	{
 		if (Row->NextRow.IsNone())
 		{
-			// Set end flag
+			DialogueComplete.Broadcast();
+			UE_LOG(LogTemp, Warning, TEXT("DialogueManager Broadcast: %s"), *GetName());
+			DialogueWidget->RemoveFromParent();
 			return;
 		}
 	}
