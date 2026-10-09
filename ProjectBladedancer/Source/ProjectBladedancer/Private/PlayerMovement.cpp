@@ -5,7 +5,6 @@
 
 UPlayerMovement::UPlayerMovement()
 {
-
 }
 
 void UPlayerMovement::BeginPlay()
