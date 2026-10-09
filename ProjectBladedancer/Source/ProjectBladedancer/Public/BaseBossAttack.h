@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "PaperSpriteComponent.h"
 #include "BaseBossAttack.generated.h"
 
 UCLASS()
@@ -19,8 +20,14 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-public:	
-	// Called every frame
-	virtual void Tick(float DeltaTime) override;
+public:	 
+	UPROPERTY(BlueprintReadWrite)
+	UPaperSpriteComponent* Sprite;
+
+	UPROPERTY(EditDefaultsOnly)
+	float DamageAmount = 1.0f;
+
+	UFUNCTION()
+	void OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit);
 
 };

@@ -25,5 +25,8 @@ protected:
 
 	UPROPERTY(EditDefaultsOnly)
 	UMaterialInstance* SpriteMaterial;
+
+	UPROPERTY(EditDefaultsOnly)
+	TSubclassOf<UActorComponent> HealthComponentClass;
 	
 };
