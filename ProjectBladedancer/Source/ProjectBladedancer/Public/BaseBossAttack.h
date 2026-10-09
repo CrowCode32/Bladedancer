@@ -21,7 +21,7 @@ protected:
 	virtual void BeginPlay() override;
 
 public:	 
-	UPROPERTY(BlueprintReadWrite)
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 	UPaperSpriteComponent* Sprite;
 
 	UPROPERTY(EditDefaultsOnly)
