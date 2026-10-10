@@ -21,7 +21,7 @@ void UDialogueManager::DisplayDialogue(FName RowName)
 	if (Row)
 	{
 		DialogueWidget->SetSpeakerName(Row->Speaker);
-		DialogueWidget->SetDialogueText(Row->Text);
+		DialogueWidget->StartTyping(Row->Text);
 		DialogueWidget->SetDialogueIcon(Row->Icon);
 
 		DialogueWidget->AddToViewport();
@@ -45,4 +45,16 @@ void UDialogueManager::ProgressDialogue()
 
 	CurrentRow = Row->NextRow;
 	DisplayDialogue(CurrentRow);
+}
+
+void UDialogueManager::SkipTyping()
+{
+	if (DialogueWidget) { DialogueWidget->SkipTyping(); }
+}
+
+bool UDialogueManager::GetLineComplete()
+{
+	if (DialogueWidget) { return DialogueWidget->LineComplete; }
+	
+	return false;
 }

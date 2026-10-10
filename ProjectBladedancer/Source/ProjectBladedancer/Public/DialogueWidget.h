@@ -24,11 +24,32 @@ protected:
 	UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
 	class UImage* DialogueIcon;
 
+	UPROPERTY(BlueprintReadWrite)
+	float TypeDelay = 0.02f;
+
 public:
 	void SetSpeakerName(FName NewSpeakerName);
 
 	void SetDialogueText(FText NewDialogueText);
 
 	void SetDialogueIcon(UTexture2D* NewDialogueIcon);
+
+	void StartTyping(FText NewDialogueText);
+
+	void TypeNextChar();
+
+	UFUNCTION(BlueprintCallable)
+	void SkipTyping();
+
+	UPROPERTY(BlueprintReadOnly)
+	bool LineComplete = false;
 	
+private:
+	FText FullText;
+
+	FString FullTextString;
+	
+	int CurrentIndex;
+
+	FTimerHandle TypingTimer;
 };

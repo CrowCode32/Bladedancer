@@ -52,6 +52,12 @@ protected:
 	UFUNCTION(BlueprintCallable)
 	void ProgressDialogue();
 
+	UFUNCTION(BlueprintCallable)
+	void SkipTyping();
+
+	UFUNCTION(BlueprintCallable)
+	bool GetLineComplete();
+
 private:
 	void DisplayDialogue(FName RowName);
 
