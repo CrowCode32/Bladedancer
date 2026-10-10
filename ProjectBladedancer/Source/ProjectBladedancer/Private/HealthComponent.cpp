@@ -33,6 +33,7 @@ void UHealthComponent::HandleTakeAnyDamage(AActor* DamagedActor, float Damage, c
 {
 	if (GetWorld()->GetTimerManager().IsTimerActive(HitTimer)) { return; } // Return if hit cooldown still going
 	CurrentHealth = FMath::Clamp((CurrentHealth - Damage), 0.0f, MaxHealth); // Deal damage
+	HealthChanged.Broadcast();
 	GetWorld()->GetTimerManager().SetTimer(HitTimer, HitCooldown, false); // Start hit cooldown again once damage dealt
 }
 

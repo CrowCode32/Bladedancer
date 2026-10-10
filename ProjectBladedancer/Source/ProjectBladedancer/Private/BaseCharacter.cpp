@@ -4,7 +4,6 @@
 #include "BaseCharacter.h"
 #include "PaperFlipbookComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
-#include "HealthComponent.h"
 
 ABaseCharacter::ABaseCharacter()
 {
@@ -21,7 +20,7 @@ ABaseCharacter::ABaseCharacter()
 		CharacterSprite->SetUsingAbsoluteRotation(true);
 	}
 
-	UHealthComponent* HC = CreateDefaultSubobject<UHealthComponent>(TEXT("HealthComponent"));
+	HC = CreateDefaultSubobject<UHealthComponent>(TEXT("HealthComponent"));
 }
 
 void ABaseCharacter::BeginPlay()

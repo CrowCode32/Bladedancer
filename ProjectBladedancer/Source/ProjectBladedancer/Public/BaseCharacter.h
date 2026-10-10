@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "PaperZDCharacter.h"
+#include "HealthComponent.h"
 #include "BaseCharacter.generated.h"
 
 /**
@@ -28,5 +29,8 @@ protected:
 
 	UPROPERTY(EditDefaultsOnly)
 	TSubclassOf<UActorComponent> HealthComponentClass;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	UHealthComponent* HC;
 	
 };

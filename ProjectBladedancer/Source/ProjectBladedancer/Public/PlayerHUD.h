@@ -13,5 +13,9 @@ UCLASS()
 class PROJECTBLADEDANCER_API UPlayerHUD : public UUserWidget
 {
 	GENERATED_BODY()
+
+protected:
+	UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
+	class UProgressBar* HealthBar;
 	
 };

@@ -8,6 +8,8 @@
 #include "HealthComponent.generated.h"
 
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FHealthChanged);
+
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class PROJECTBLADEDANCER_API UHealthComponent : public UActorComponent
 {
@@ -17,11 +19,14 @@ public:
 	// Sets default values for this component's properties
 	UHealthComponent();
 
+	UPROPERTY(BlueprintAssignable)
+	FHealthChanged HealthChanged;
+
 protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
 
-	UPROPERTY(EditDefaultsOnly)
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
 	float MaxHealth = 1.0f;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
